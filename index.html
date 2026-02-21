@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>TSHANDA TSHA MUNEI · helping hearts</title>
+  <!-- Font Awesome 6 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- CSS RESET & VARIABLES ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --purple-deep: #4a2c6d;
+      --purple-medium: #7e57b0;
+      --purple-soft: #b28bdd;
+      --purple-light: #efe5ff;
+      --purple-bg: #f5eeff;
+      --golden: #fdd48d;
+      --white-soft: #fffaf3;
+      --text-dark: #2b1d36;
+      --shadow-sm: 0 10px 20px -5px rgba(75, 45, 110, 0.2);
+      --shadow-md: 0 20px 28px -10px rgba(80, 45, 120, 0.3);
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: var(--purple-bg);
+      color: var(--text-dark);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ----- TYPOGRAPHY responsive ----- */
+    h1, h2, h3 {
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    /* ----- WHATSAPP FLOATING (mobile friendly tap) ----- */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 15px;
+      background-color: #25d366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      z-index: 999;
+      transition: all 0.2s;
+      text-decoration: none;
+      border: 3px solid white;
+    }
+
+    .whatsapp-float:hover, .whatsapp-float:focus {
+      background-color: #20b359;
+      transform: scale(1.08);
+    }
+
+    /* ----- HEADER with purple background & logo (fully responsive) ----- */
+    .hero {
+      background: linear-gradient(145deg, #643f96, #3f2570);
+      padding: 1.5rem 1rem 2rem;
+      text-align: center;
+      border-bottom: 5px solid var(--golden);
+    }
+
+    .logo-block {
+      background: rgba(255, 255, 255, 0.95);
+      display: inline-block;
+      width: fit-content;
+      max-width: 95%;
+      padding: 1rem 1.8rem;
+      border-radius: 60px 20px 60px 20px;
+      box-shadow: 0 15px 0 #51387e, 0 20px 25px rgba(0,0,0,0.3);
+      border: 3px solid #ffd893;
+      margin: 0 auto;
+    }
+
+    .logo-main {
+      font-size: clamp(1.8rem, 8vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #321f4a;
+      text-shadow: 3px 3px 0 #f3cb7a;
+      line-height: 1.2;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .logo-sub {
+      font-size: clamp(1rem, 4vw, 1.8rem);
+      font-weight: 600;
+      color: #472e68;
+      background: #fff0bc;
+      display: inline-block;
+      padding: 0.3rem 1.5rem;
+      border-radius: 40px;
+      margin-top: 6px;
+      border: 2px solid #b589e0;
+      word-break: break-word;
+    }
+
+    .tagline-below {
+      margin-top: 18px;
+      font-size: clamp(1rem, 4.5vw, 1.7rem);
+      color: #ffefc0;
+      background: #5b3d8ab3;
+      display: inline-block;
+      padding: 0.4rem 1.8rem;
+      border-radius: 60px;
+      backdrop-filter: blur(5px);
+      max-width: 95%;
+    }
+
+    /* ----- CONTAINER (fluid) ----- */
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 1.5rem auto 2rem;
+      padding: 0 16px;
+    }
+
+    /* mission statement */
+    .mission-statement {
+      background: white;
+      border-radius: 30px 30px 30px 5px;
+      padding: 1.5rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+      border-left: 8px solid var(--purple-medium);
+    }
+
+    .mission-statement p {
+      font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+    }
+
+    /* ----- INFO CARDS (grid with auto-fit) ----- */
+    .info-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      margin: 30px 0 40px;
+    }
+
+    .info-card {
+      background: #fdfaff;
+      border-radius: 32px;
+      padding: 1.5rem 1.2rem;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid #d5b8ff;
+      transition: 0.15s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-card h2 {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      border-bottom: 3px solid var(--purple-soft);
+      display: inline-block;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+
+    .detail-line {
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .address-block {
+      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+      line-height: 1.6;
+      border-left: 3px solid #b78be2;
+      padding-left: 12px;
+      word-break: break-word;
+    }
+
+    .btn-phone {
+      display: inline-block;
+      background: var(--purple-deep);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      text-decoration: none;
+      margin-top: 20px;
+      border: 2px solid #ba9be0;
+      text-align: center;
+      transition: 0.2s;
+      width: fit-content;
+    }
+
+    .btn-phone i {
+      color: white;
+    }
+
+    .btn-phone:hover {
+      background: #352153;
+    }
+
+    /* ----- GALLERY responsive (flex wrap) ----- */
+    .gallery-title {
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+      margin: 30px 0 25px;
+      background: #e6d2ff;
+      padding: 15px 20px;
+      border-radius: 0 40px 0 40px;
+      border-left: 12px solid #a371cf;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .gallery-item {
+      flex: 1 1 260px;
+      max-width: 350px;
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 18px 25px -12px #9f88be;
+      border: 3px solid #d5b3ff;
+      transition: transform 0.2s;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-8px);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      background: #cfc1db;
+    }
+
+    .caption {
+      padding: 15px 8px;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    /* ----- DUAL ADDRESS (responsive) ----- */
+    .dual-address {
+      background: #dbc6ff;
+      padding: 1.8rem 1rem;
+      border-radius: 50px 15px 50px 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+      margin: 30px 0;
+      border: 4px solid #8e62bc;
+    }
+
+    .address-item {
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      background: #fffdf7;
+      padding: 1.2rem 1.5rem;
+      border-radius: 50px;
+      box-shadow: 0 8px 0 #704fa0;
+      flex: 1 1 280px;
+      text-align: center;
+      border: 2px solid #ad7edb;
+    }
+
+    .address-item strong {
+      font-size: 1.4rem;
+      color: #4d2d75;
+    }
+
+    /* ----- COUNSELING SECTION (responsive grid) ----- */
+    .counseling-section {
+      background: #f2e4ff;
+      border-radius: 45px 45px 30px 30px;
+      padding: 1.8rem 1.5rem 2.2rem;
+      margin: 2rem 0;
+      border: 4px solid #a87ad5;
+    }
+
+    .counseling-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .counseling-header h2 {
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
+    }
+
+    .counseling-header i {
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      color: #5e3892;
+    }
+
+    .counseling-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .counseling-text {
+      background: #ffffffed;
+      padding: 1.6rem 1.4rem;
+      border-radius: 35px;
+      border: 3px solid #b185dd;
+      font-size: 1.2rem;
+    }
+
+    .counseling-text ul {
+      margin-left: 5px;
+    }
+
+    .counseling-text li {
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .contact-form {
+      background: white;
+      border-radius: 35px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 18px 25px -12px #8b67b9;
+      border: 3px solid #b185dd;
+    }
+
+    .contact-form h3 {
+      font-size: clamp(1.6rem, 5vw, 2rem);
+      margin-bottom: 18px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e2d0ff;
+      border-radius: 40px;
+      font-size: 1rem;
+      background: #fbf6ff;
+    }
+
+    .form-group textarea {
+      border-radius: 25px;
+    }
+
+    .submit-btn {
+      background: #633d96;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 1.3rem;
+      border-radius: 60px;
+      width: 100%;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid #ba94e6;
+    }
+
+    /* ----- EXTRA CONTACT STRIP (responsive) ----- */
+    .contact-highlight {
+      text-align: center;
+      margin: 25px 0 15px;
+    }
+
+    .contact-highlight p {
+      background: #e5ceff;
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      font-size: clamp(1.2rem, 4vw, 1.6rem);
+      border: 4px solid #9166c2;
+      width: fit-content;
+      max-width: 98%;
+      margin: 0 auto;
+    }
+
+    /* ----- FOOTER (responsive) ----- */
+    .footer-note {
+      background: #301f45;
+      color: #f1e0c5;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 3rem;
+      border-top: 6px solid #c2a0eb;
+      font-size: clamp(1rem, 3.5vw, 1.3rem);
+    }
+
+    /* tablet & small laptop improvements */
+    @media (min-width: 768px) {
+      .container { padding: 0 25px; }
+      .info-card { padding: 2rem 1.5rem; }
+    }
+
+    @media (min-width: 1024px) {
+      .hero { padding: 2.2rem 2rem; }
+    }
+
+    /* extra small devices */
+    @media (max-width: 480px) {
+      .whatsapp-float { width: 52px; height: 52px; font-size: 30px; bottom: 15px; right: 12px; }
+      .btn-phone { width: 100%; justify-content: center; }
+      .dual-address { padding: 1.5rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- floating WhatsApp icon (mobile friendly tap target) -->
+  <a href="https://wa.me/27694151153?text=Hello%20TSHANDA%20TSHA%20MUNEI%2C%20I%20need%20support%20or%20counseling" 
+     class="whatsapp-float" target="_blank" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- header with purple background and exact logo -->
+  <div class="hero">
+    <div class="logo-block">
+      <div class="logo-main">TSHANDA TSHA MUNEI</div>
+      <div class="logo-sub">HAPPYKIDS, HAPPYPARENTS. HAPPYHEARTS</div>
+    </div>
+    <div class="tagline-below">
+      <i class="fas fa-heart" style="color:#ffda7a;"></i> nonprofit · caring & counseling <i class="fas fa-heart" style="color:#ffda7a;"></i>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- mission statement -->
+    <div class="mission-statement">
+      <p>
+        <i class="fas fa-hands-helping" style="color:#7e57b0;"></i> 
+        <strong>TSHANDA TSHA MUNEI</strong> provides material aid, free counseling, and family support.
+        Two welcoming locations in Tshakhuma and Pretoria Booysens.
+      </p>
+    </div>
+
+    <!-- contact & address cards (responsive grid) -->
+    <div class="info-row">
+      <div class="info-card">
+        <h2><i class="fas fa-phone-alt"></i> Call / WhatsApp</h2>
+        <div class="detail-line">
+          <i class="fas fa-mobile-alt"></i>
+          <span style="font-size:clamp(1.6rem,5vw,2rem); font-weight:600;">069 415 1153</span>
+        </div>
+        <a href="tel:0694151153" class="btn-phone"><i class="fas fa-phone"></i> tap to call</a>
+        <div style="margin-top: 20px; background:#ede1ff; border-radius: 40px; padding: 12px;">
+          <i class="fab fa-whatsapp" style="color:#25d366;"></i> +27 69 415 1153
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h2><i class="fas fa-map-pin"></i> Tshakhuma</h2>
+        <div class="address-block">
+          <i class="fas fa-location-dot"></i> Luvhalani, Mahambakahle St<br>
+          <span style="font-size:1.8rem; font-weight:600;">House 426</span>
+        </div>
+        <div style="margin-top:20px; background:#e9d7ff; border-radius:20px; padding:8px;">📍 Venda · counseling by appointment</div>
+      </div>
+
+      <div class="info-card">
+        <h2><i class="fas fa-map-pin"></i> Pretoria</h2>
+        <div class="address-block">
+          <i class="fas fa-location-dot"></i> Booysens, Luderitz St<br>
+          <span style="font-size:1.8rem; font-weight:600;">House 894</span>
+        </div>
+        <div style="margin-top:20px; background:#e9d7ff; border-radius:20px; padding:8px;">📍 Gauteng · walk-in support</div>
+      </div>
+    </div>
+
+    <!-- COUNSELING + FORM (fully responsive) -->
+    <div class="counseling-section">
+      <div class="counseling-header">
+        <i class="fas fa-heart"></i>
+        <h2>💬 counseling & support</h2>
+        <i class="fas fa-heart" style="transform: rotate(180deg);"></i>
+      </div>
+
+      <div class="counseling-grid">
+        <div class="counseling-text">
+          <i class="fas fa-comment-dots"></i> <strong>Free & confidential</strong>
+          <ul>
+            <li><i class="fas fa-child"></i> Child & youth counseling</li>
+            <li><i class="fas fa-female"></i> Women / family support</li>
+            <li><i class="fas fa-hand-holding-heart"></i> Grief & trauma debriefing</li>
+            <li><i class="fas fa-home"></i> Parenting advice & home visits</li>
+            <li><i class="fas fa-phone"></i> Tele-counseling</li>
+          </ul>
+          <p><i class="fas fa-clock"></i> Mon–Fri 9–17, Sat 9–13</p>
+        </div>
+
+        <div class="contact-form">
+          <h3><i class="fas fa-pen"></i> request support</h3>
+          <form action="#" method="post">
+            <div class="form-group"><input type="text" placeholder="Your full name" required></div>
+            <div class="form-group"><input type="tel" placeholder="Phone (WhatsApp)"></div>
+            <div class="form-group"><input type="email" placeholder="Email (optional)"></div>
+            <div class="form-group">
+              <select required>
+                <option value="" disabled selected>– support needed –</option>
+                <option>Individual counseling</option>
+                <option>Child / youth support</option>
+                <option>Family / parenting</option>
+                <option>Grief / trauma</option>
+                <option>Material assistance</option>
+              </select>
+            </div>
+            <div class="form-group"><textarea rows="2" placeholder="How can we help?"></textarea></div>
+            <div class="form-group" style="flex-direction:row; align-items:center; gap:10px;">
+              <label style="display:flex; gap:8px;"><input type="checkbox" required> I agree to be contacted</label>
+            </div>
+            <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> send request</button>
+          </form>
+          <p style="margin-top:12px; font-size:0.9rem; color:#5a4085;"><i class="fas fa-shield-alt"></i> reply within 24h</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- gallery -->
+    <div class="gallery-title">
+      <i class="fas fa-camera-retro" style="color:#7d51b3;"></i>  helping hands – moments of care
+    </div>
+
+    <div class="gallery">
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1594708767771-a7502209ff51?w=400&h=260&fit=crop&auto=format" alt="Volunteers handing out meals" loading="lazy"><div class="caption"><i class="fas fa-utensils"></i> nourishing families</div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&h=260&fit=crop&auto=format" alt="Community support" loading="lazy"><div class="caption"><i class="fas fa-smile"></i> happy kids, happy hearts</div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?w=400&h=260&fit=crop&auto=format" alt="Caring for elderly" loading="lazy"><div class="caption"><i class="fas fa-hand-holding-heart"></i> dignity for all ages</div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=400&h=260&fit=crop&auto=format" alt="Donation packages" loading="lazy"><div class="caption"><i class="fas fa-tshirt"></i> clothing & essentials</div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1489396929980-0c8b928e71fc?w=400&h=260&fit=crop&auto=format" alt="Village landscape" loading="lazy"><div class="caption"><i class="fas fa-home"></i> Tshakhuma Luvhalani</div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1625884920466-745b27b0ca51?w=400&h=260&fit=crop&auto=format" alt="Urban street Pretoria" loading="lazy"><div class="caption"><i class="fas fa-city"></i> Booysens, Pretoria</div></div>
+    </div>
+
+    <!-- dual address block exactly as requested -->
+    <div class="dual-address">
+      <div class="address-item">
+        <strong><i class="fas fa-map-marker-alt"></i> TSHANDA TSHA MUNEI – Tshakhuma</strong>
+        Tshakhuma Luvhalani · Mahambakahle St <br>
+        <span style="font-size:2.2rem;">426</span>
+      </div>
+      <div class="address-item">
+        <strong><i class="fas fa-map-marker-alt"></i> TSHANDA TSHA MUNEI – Pretoria</strong>
+        Pretoria Booysens · Luderitz St <br>
+        <span style="font-size:2.2rem;">894</span>
+      </div>
+    </div>
+
+    <!-- extra contact strip -->
+    <div class="contact-highlight">
+      <p>
+        <i class="fas fa-phone-alt" style="color:#4b2b6e;"></i> <strong>069 415 1153</strong> 
+        <span style="margin:0 15px;">|</span> 
+        <i class="fab fa-whatsapp" style="color:#25d366;"></i> +27 69 415 1153
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <i class="fas fa-heart" style="color:#e9c8ff;"></i> TSHANDA TSHA MUNEI – counseling, support & dignity 
+    <i class="fas fa-heart" style="color:#e9c8ff;"></i> <br>
+    <span>📞 069 415 1153  |  📍 Tshakhuma (426) & Pretoria (894)</span>
+  </div>
+</body>
+</html>
